@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: postgresql
   labels:
-    app: helloworld-nodejs
+    app: hello-postgresql
 spec:
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: helloworld-nodejs
+        app: hello-postgresql
         tier: postgreSQL
     spec:
       containers:

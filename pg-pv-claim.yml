@@ -5,10 +5,10 @@ metadata:
   # annotations:
   #   volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
   labels:
-    app: helloworld-nodejs
+    app: hello-postgresql
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 23Gi
+      storage: 20Gi

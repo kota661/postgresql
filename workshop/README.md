@@ -1,12 +1,23 @@
-# PostgreSQL
+# PostgreSQL をデプロイしてみよう
 
-PostgreSQLをIKS上にデプロイしてみよう。
+- [PostgreSQL をデプロイしてみよう](#postgresql-%E3%82%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%97%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86)
+  - [Workshopの内容](#%08workshop%E3%81%AE%E5%86%85%E5%AE%B9)
+  - [Persistent Volume とは？](#persistent-volume-%E3%81%A8%E3%81%AF)
+  - [PostgreSQLのコンテナイメージを試す](#postgresql%E3%81%AE%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%82%92%E8%A9%A6%E3%81%99)
+  - [IKSへのデプロイ方法](#iks%E3%81%B8%E3%81%AE%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E6%96%B9%E6%B3%95)
+  - [お片付け](#%E3%81%8A%E7%89%87%E4%BB%98%E3%81%91)
+  - [Tips](#tips)
+  - [APPENDIX](#appendix)
+
+
+
+## Workshopの内容
 
 * 学べること
-    Persistent Volumeを活用しデータの永続化を行う方法
+  * Persistent Volumeを活用しデータの永続化を行う方法
 
 * 事前準備
-  * IBM Cloudの有料アカウント
+  * IBM Cloudの有料アカウント
   * IKSの標準クラスタ（有料）
 
 
@@ -60,6 +71,27 @@ https://console.bluemix.net/docs/containers/cs_storage_basics.html#kube_concepts
     # 結果確認
     kubectl get deploy,svc
     ```
+
+
+4. IKS上のPostgreSQLへのアクセス
+
+    ```
+    # アクセスするためのPublic IPを確認
+    kubectl get svc/postgresql
+    ```
+
+    出力結果
+    ```
+    NAMESPACE     NAME                                                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
+    default       service/postgresql                                       LoadBalancer   172.21.48.169    128.168.71.37    5432:32324/TCP               26d
+    ```
+    上記の場合アクセスするIPとポートは　**128.168.71.37:32324**　です
+
+
+## お片付け
+```
+kubectl delete -f .
+```
 
 
 ## Tips
