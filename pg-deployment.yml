@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgresql
+  labels:
+    app: helloworld-nodejs
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: helloworld-nodejs
+        tier: postgreSQL
+    spec:
+      containers:
+        - image: postgres:11
+          name: postgresql
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: password
+          ports:
+            - containerPort: 5432
+              name: postgresql
+          volumeMounts:
+            - name: postgresql
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgresql
+          persistentVolumeClaim:
+            claimName: postgres-claim

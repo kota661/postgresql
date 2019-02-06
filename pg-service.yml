@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+  labels:
+    app: helloworld-nodejs
+spec:
+  selector:
+    app: helloworld-nodejs
+    tier: postgreSQL
+  type: LoadBalancer
+  ports:
+    - port: 5432
+      targetPort: 5432
+  loadBalancerSourceRanges:
+    - 127.0.0.1/32
+    # - 131.147.89.138/32
